@@ -5,12 +5,17 @@ import java.net.URL;
 import org.json.JSONObject;
 import java.util.Scanner;
 
+import static java.lang.Integer.*;
+
 public class WeatherApp {
-    // Copy your API-KEY here
-    public final static String apiKey = "API-KEY";
+    public final static String apiKey = "2a5bd33aafef44c680b141355232502";
     // TODO: Write main function
     public static void main(String[] args) {
-
+        Scanner input = new Scanner(System.in);
+        String CityName = input.nextLine();
+        String weatherData = getWeatherData(CityName);
+        double temperature = getTemperature(weatherData);
+        int Humidity = getHumidity(weatherData);
     }
 
     /**
@@ -41,12 +46,17 @@ public class WeatherApp {
     // TODO: Write getTemperature function returns celsius temperature of city by given json string
     public static double getTemperature(String weatherJson){
         double answer = 0.0;
+        JSONObject weatherMan = new JSONObject(weatherJson);
+        weatherMan.getJSONArray("current").getJSONObject(2).getDouble("temp_c");
         return answer;
     }
 
     // TODO: Write getHumidity function returns humidity percentage of city by given json string
     public static int getHumidity(String weatherJson){
         int answer = 0;
+        JSONObject weatherMan = new JSONObject(weatherJson);
+        String placeHolder = String.valueOf(weatherMan.getJSONObject("humidity"));
+        answer = parseInt(placeHolder);
         return answer;
     }
 }
