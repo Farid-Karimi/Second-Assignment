@@ -11,11 +11,15 @@ public class WeatherApp {
     public final static String apiKey = "2a5bd33aafef44c680b141355232502";
     // TODO: Write main function
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String CityName = input.nextLine();
+        //Scanner input = new Scanner(System.in);
+        String CityName = "London";
         String weatherData = getWeatherData(CityName);
         double temperature = getTemperature(weatherData);
         int Humidity = getHumidity(weatherData);
+        System.out.print("Humidity: ");
+        System.out.println(Humidity);
+        System.out.print("temperature: ");
+        System.out.println(temperature);
     }
 
     /**
@@ -38,7 +42,8 @@ public class WeatherApp {
             reader.close();
             return stringBuilder.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Fuck you");
+//            e.printStackTrace();
             return null;
         }
     }
@@ -47,7 +52,7 @@ public class WeatherApp {
     public static double getTemperature(String weatherJson){
         double answer = 0.0;
         JSONObject weatherMan = new JSONObject(weatherJson);
-        weatherMan.getJSONArray("current").getJSONObject(2).getDouble("temp_c");
+        answer = weatherMan.getJSONObject("current").getDouble("temp_c");
         return answer;
     }
 
@@ -55,8 +60,7 @@ public class WeatherApp {
     public static int getHumidity(String weatherJson){
         int answer = 0;
         JSONObject weatherMan = new JSONObject(weatherJson);
-        String placeHolder = String.valueOf(weatherMan.getJSONObject("humidity"));
-        answer = parseInt(placeHolder);
+        answer = (weatherMan.getJSONObject("current").getInt("humidity"));
         return answer;
     }
 }
