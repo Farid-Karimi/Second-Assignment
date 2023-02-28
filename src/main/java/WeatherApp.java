@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
-
 import static java.lang.Integer.*;
 
 public class WeatherApp {
@@ -17,28 +16,32 @@ public class WeatherApp {
         System.out.print("Enter City name: ");
         String CityName = input.nextLine();
         String weatherData = getWeatherData(CityName);
-//        double temperature = getTemperature(weatherData);
-        int Humidity = getHumidity(weatherData);
-        //------------------------------
+        //----------------------this is the GUI section--------------------------------
         JFrame frame = new JFrame("Weather");
         frame.setSize(450, 380);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //Icon of the window
         ImageIcon icon = new ImageIcon("icon.png");
+        //is the background which I haven't fiqured out how to make it work YET :)
         ImageIcon wall = new ImageIcon("wall.png");
         frame.setIconImage(icon.getImage());
         frame.setResizable(false);
 
+        //is basically a container for all the labels and Icons ....
         JPanel panel = new JPanel();
+        //sets the layout of the panel to null so everything has to be managed by coordination
         panel.setLayout(null);
+        //background color is light blue
         panel.setBackground(new Color(193,219,234));
 
         String humidity = "Humidity : " + getHumidity(weatherData);
-        String temperature = "temperature : " + getTemperature(weatherData);
-        String region = "region : " + getRegion(weatherData);
+        String temperature = "Temperature : " + getTemperature(weatherData);
+        String region = "Region : " + getRegion(weatherData);
         String WindKph = "Wind Kph : " + getWind(weatherData);
         String Condition = "Sky Condition : " + getCondition(weatherData);
 
+        //each label is a Jlabel to show the coresponding Data to its name
         JLabel labelRegion = new JLabel(region);
         labelRegion.setBounds(50, 50, 400, 30);
         labelRegion.setForeground(new Color(27,156,227));
@@ -64,6 +67,7 @@ public class WeatherApp {
         labelCondition.setForeground(new Color(27,156,227));
         labelCondition.setFont(new Font("Bahnschrift" , Font.PLAIN ,20));
 
+        //adding the labels to the panel
         panel.add(labelWindKph);
         panel.add(labelHumidity);
         panel.add(labelTemperature);
